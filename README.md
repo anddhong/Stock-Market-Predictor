@@ -12,3 +12,5 @@ The direction of stock price (either increase or decrease from the previous day)
 (3) different parameter values (For KNN, number of neighbors) to find the model with the highest accuracy. 
 When the optimal model is found, the model is tested against this year's data to see how well the model performed.
 (This is called a train-test split)
+
+Run the StockPredictionModel.py file.
