@@ -13,7 +13,7 @@ warnings.filterwarnings("ignore")
 
 
 #python script
-import iex_collect as iex
+import IEX_API as iex
 
 def preprocess(data,indicators):
     pd.set_option('max_columns',10)
@@ -38,8 +38,8 @@ def preprocess(data,indicators):
     data=data.replace([np.inf], np.nan).dropna()
     data=data.iloc[10:]
 
-    print(data.tail())
-    exit()
+    #print(data.tail())
+    #exit()
 
     #Normalize Data
     MinMax=preprocessing.MinMaxScaler()
@@ -140,7 +140,7 @@ def prediction(clf,features,data):
     return action
 
 def addNew(data):
-    new_data=iex.stock_info(stock).return_today_data()
+    new_data=[iex.stock_info(stock).return_today_data()]
     new_data[0]['close']=new_data[0]['delayedPrice']
     data=data.append(new_data)
     return data
@@ -188,8 +188,8 @@ def execution(stock,predict=False):
 ###########################################################
 
 if __name__=='__main__':
-    stockList=['baba','wmt','aapl','goog','amzn','orcl','fb','twtr',
-                'cmg','gis','k','mcd','hsy','tsn','spy']
+    #stockList=['baba','wmt','aapl','goog','amzn','orcl','fb','twtr',
+    #            'cmg','gis','k','mcd','hsy','tsn','spy']
     stockList=['ba','vz','ibm','bidu','spy','aaba',
                 'pnc','gs','bac','wfc']
     #stockList=['aaba','jpm','td','vod','qcom','cmcsa','cost','amgn',
@@ -216,11 +216,3 @@ if __name__=='__main__':
         print('---')
     print('average accuracy: %.8f' % (float(totalSuccess)/float(totalTested)))
     print('test / observed = %d / %d = %.8f' % (totalTested,totalObserved,float(totalTested)/totalObserved))
-
-# Success rate of Model (label incomplete vs insufficient model)
-# calculate profit and loss from testing set
-# Create Prediction function
-# print confusion matrix
-# Create Visual
-# test if combining data from all companies is good
-
